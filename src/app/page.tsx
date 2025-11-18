@@ -31,6 +31,15 @@ const paintings = [
   />,
 ];
 
+export interface StoryEntry {
+  title: string;
+  subtitle: string;
+  text: string;
+  location: string;
+  time: string;
+  svgElement: string;
+}
+
 function MainMenu() {
   const mode = useSelector((state: State) => state.app.mode);
   const dispatch = useDispatch();
@@ -39,7 +48,7 @@ function MainMenu() {
     (state: State) => state.app.selectedPainting
   );
   // const [selectedPainting, setSelectedPainting] = useState(0);
-  const [storyData, setStoryData] = useState();
+  const [storyData, setStoryData] = useState<Array<StoryEntry>>();
 
   useEffect(() => {
     fetch("/story-data.json")
