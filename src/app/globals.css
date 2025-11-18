@@ -244,8 +244,8 @@ input:checked + .slider:before {
   }
 }
 
-.myText {
-  font-family: "Oooh Baby", cursive;
-  font-weight: 400;
-  font-style: normal;
+.painting-timeline {
+  path {
+    fill: transparent;
+  }
 }
