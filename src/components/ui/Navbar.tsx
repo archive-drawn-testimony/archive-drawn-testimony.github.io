@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { JSX } from "react";
 
 export function Navbar(): JSX.Element {
   return (

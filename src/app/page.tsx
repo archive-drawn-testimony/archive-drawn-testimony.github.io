@@ -115,12 +115,18 @@ function MainMenu() {
                   <div className="size-full flex gap-2 flex-col p-3 px-6 justify-center">
                     <div className={`text-xl ${noto_serif.className}`}>
                       {story.title
-                        ? story.title.split("\n").map((e) => <div>{e}</div>)
+                        ? story.title
+                            .split("\n")
+                            .map((e, i) => <div key={`title-${i}`}>{e}</div>)
                         : "Please add title."}
                     </div>
                     <div className={`text-2xl ${reenie_beanie.className}`}>
                       {story.subtitle
-                        ? story.subtitle.split("\n").map((e) => <div>{e}</div>)
+                        ? story.subtitle
+                            .split("\n")
+                            .map((e, i) => (
+                              <div key={`timeline-subtitle-${i}`}>{e}</div>
+                            ))
                         : "Please add subtitle."}
                     </div>
                     <div className="text-xs opacity-75 flex flex-col gap-1">
@@ -129,7 +135,11 @@ function MainMenu() {
                     </div>
                     <div className="text-sm flex gap-1 flex-col">
                       {story.text
-                        ? story.text.split("\n").map((e) => <p>{e}</p>)
+                        ? story.text
+                            .split("\n")
+                            .map((e, i) => (
+                              <p key={`timeline-text-${i}`}>{e}</p>
+                            ))
                         : "Please add text."}
                     </div>
                     {/* <div className="grid grid-cols-[auto_auto] items-center justify-center gap-2">
@@ -153,7 +163,7 @@ function MainMenu() {
 
                     <feDiffuseLighting
                       in="noise"
-                      lighting-color="#fff"
+                      lightingColor="#fff"
                       surfaceScale="2"
                     >
                       <feDistantLight azimuth="45" elevation="60" />

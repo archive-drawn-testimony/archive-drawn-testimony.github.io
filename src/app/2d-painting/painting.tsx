@@ -261,14 +261,13 @@ export default function Painting(props: PaintingProps) {
     });
   }
 
-  function clickInteractiveElement(e) {
+  function clickInteractiveElement(e: SVGPathElement) {
     resetSelectedElements();
 
-    const element = e as HTMLElement;
-    const clickedID = (e as HTMLElement).id;
-    const pathGroup = (e as HTMLElement).parentElement as HTMLElement;
+    const clickedID = e.id;
+    const pathGroup = e.parentElement as HTMLElement;
     const group = pathGroup.parentElement as HTMLElement;
-    pathGroup.classList.add("selected");
+    group.classList.add("selected");
 
     setHiddenImages(group as unknown as SVGElement, false);
     dispatch(setSelectedGroup(group.id));
@@ -278,7 +277,7 @@ export default function Painting(props: PaintingProps) {
   const clickHandler = (e: Event) => {
     e.stopImmediatePropagation();
     if (e.target != null) {
-      clickInteractiveElement(e.target);
+      clickInteractiveElement(e.target as SVGPathElement);
     }
   };
 
@@ -447,7 +446,7 @@ export default function Painting(props: PaintingProps) {
   useEffect(() => {
     if (svgRef.current != null) {
       const svg = svgRef.current as SVGSVGElement;
-      if (svg != null && selectedGroup != null) {
+      if (svg != null && selectedGroup != null && selectedGroup != "") {
         const toBeClicked = svg
           .querySelector(`#${selectedGroup}`)
           ?.querySelector("path");

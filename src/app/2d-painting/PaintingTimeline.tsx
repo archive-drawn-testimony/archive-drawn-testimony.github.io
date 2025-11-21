@@ -21,6 +21,8 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
     (state: State) => state.app.selectedPainting
   );
 
+  const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
+
   const [interactiveElements, setInteractiveElements] = useState<
     Record<string, Array<string>>
   >({});
@@ -52,8 +54,16 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
           const story = storyData ? storyData[e.key] ?? null : null;
           return (
             <>
-              <div className="text-xs row-start-1 py-1">{story?.title}</div>
-              <div className="relative items-center justify-between flex pr-1 row-start-2">
+              <div
+                key={`timeline-title-${i}`}
+                className="text-xs row-start-1 py-1"
+              >
+                {story?.title}
+              </div>
+              <div
+                key={`timeline-image-${i}`}
+                className="relative items-center justify-between flex pr-1 row-start-2"
+              >
                 <div className="absolute top-0 left-0 w-full h-full flex items-center">
                   <div
                     className={`h-1 mt-[4px] w-full ${
@@ -63,7 +73,9 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                 </div>
                 <div
                   className={`size-18 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center ${
-                    selectedPainting === i ? "border-3 border-gray-400" : ""
+                    selectedPainting === i && selectedGroup == null
+                      ? "border-3 border-gray-400"
+                      : ""
                   }`}
                   key={`timeline-entry-${i}`}
                   onClick={() => {
@@ -73,7 +85,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                 >
                   <SVG
                     src={e.svgFile}
-                    className="size-full object-contain absolute"
+                    className="size-full object-contain absolute timeline-painting-svg"
                     // style={{
                     //   backgroundImage: "url('/assets/paper-texture.jpg')",
                     // }}
@@ -87,17 +99,32 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                       }
                       tmpInteractiveElements[i.toString()] = tmpIE;
                       setInteractiveElements(tmpInteractiveElements);
-                      return code.replaceAll('id="', 'id="timeline-');
+
+                      const newCode = code.replaceAll(
+                        '_image"',
+                        '_image" class="myimage"'
+                      );
+
+                      return newCode.replaceAll('id="', 'id="timeline-');
                     }}
                   />
                 </div>
                 {selectedPainting === i &&
                   interactiveElements[i.toString()] != null &&
-                  interactiveElements[i.toString()].map((ie) => (
-                    <ThumbnailPainting elementID={ie} svgFile={e.svgFile} />
+                  interactiveElements[i.toString()].map((ie, i) => (
+                    <ThumbnailPainting
+                      key={`timeline-thumbnail-${i}`}
+                      elementID={ie}
+                      svgFile={e.svgFile}
+                    />
                   ))}
               </div>
-              <div className="text-xs row-start-3 py-1">{story?.time}</div>
+              <div
+                key={`timeline-time-${i}`}
+                className="text-xs row-start-3 py-1"
+              >
+                {story?.time}
+              </div>
             </>
           );
         })}

@@ -220,14 +220,21 @@ input:checked + .slider:before {
   filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
 }
 
-.selected > .myPath { 
-  stroke: rgb(0, 0, 0);
-  stroke-width: 2px;
-  stroke-opacity: 50%;
-  fill: rgba(238, 238, 238, 0.1) !important;
-  cursor: pointer;
-  -webkit-filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
-  filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
+.selected { 
+  .myPath { 
+    stroke: rgb(0, 0, 0);
+    stroke-width: 2px;
+    stroke-opacity: 50%;
+    fill: rgba(238, 238, 238, 0.1) !important;
+    cursor: pointer;
+    -webkit-filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
+    filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
+  }
+
+  image {
+    -webkit-filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
+    filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
+  }
 }
 
 .fade-stroke-animation {
@@ -259,3 +266,9 @@ input:checked + .slider:before {
     fill: transparent;
   }
 }
+
+/* .timeline-painting-svg {
+  .myimage {
+    filter: invert(0.1);
+  }
+} */

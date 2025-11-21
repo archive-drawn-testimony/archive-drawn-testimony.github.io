@@ -1,8 +1,7 @@
-import SVG from "react-inlinesvg";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setSelectedGroup } from "../../../store/appSlice";
-import { ReactNode, useEffect, useState } from "react";
-import { renderToString } from "react-dom/server";
+import { State } from "../../../store/store";
 
 interface ThumbnailPaintingProps {
   elementID: string;
@@ -14,6 +13,8 @@ export function ThumbnailPainting(props: ThumbnailPaintingProps) {
   const dispatch = useDispatch();
 
   const [image, setImage] = useState<string | null>(null);
+
+  const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
 
   useEffect(() => {
     fetch(svgFile)
@@ -36,7 +37,9 @@ export function ThumbnailPainting(props: ThumbnailPaintingProps) {
 
   return (
     <div
-      className={`size-12 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center`}
+      className={`size-12 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center ${
+        selectedGroup === elementID ? "border-3 border-gray-400" : ""
+      }`}
       key={`timeline-sub-entry-${elementID}`}
       onClick={(e) => {
         dispatch(setSelectedGroup(elementID));
@@ -44,7 +47,10 @@ export function ThumbnailPainting(props: ThumbnailPaintingProps) {
     >
       {image && (
         <div className="size-full flex items-center justify-center">
-          <img className="" src={image} />
+          <img
+            style={{ filter: "drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px)" }}
+            src={image}
+          />
         </div>
       )}
     </div>
