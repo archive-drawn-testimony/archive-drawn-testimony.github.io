@@ -34,7 +34,7 @@ const pathStoryMapping = {
   writing_Image_copy: "documentation",
 } as Record<string, string>;
 
-function getSvgDimensionsFromString(svgString: string) {
+export function getSvgDimensionsFromString(svgString: string) {
   const readAttr = (name: string) => {
     const regex = new RegExp(`${name}\\s*=\\s*"([^"]+)"`);
     const match = svgString.match(regex);
@@ -433,7 +433,7 @@ export default function Painting(props: PaintingProps) {
 
       const paths = (svgRef.current as SVGSVGElement).querySelectorAll("path");
       paths.forEach((element) => {
-        if (element.id != null) {
+        if (element.id == null) {
           element.id = nanoid(4);
         }
         if (inactive !== true) {

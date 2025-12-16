@@ -267,8 +267,14 @@ input:checked + .slider:before {
   }
 }
 
-/* .timeline-painting-svg {
-  .myimage {
-    filter: invert(0.1);
+.timeline-painting-svg {
+  image {
+    filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px);
   }
-} */
+}
+
+.mybackground {
+  image {
+    filter: none;
+  }
+}

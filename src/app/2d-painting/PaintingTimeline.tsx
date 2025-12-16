@@ -1,5 +1,5 @@
 "use client";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import SVG from "react-inlinesvg";
 import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,12 +24,33 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
   const selectedPainting = useSelector(
     (state: State) => state.app.selectedPainting
   );
+  const svgRef = useRef(null);
 
   const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
 
   const [interactiveElements, setInteractiveElements] = useState<
     Record<string, Array<string>>
   >({});
+
+  useEffect(() => {
+    if (svgRef.current != null) {
+      console.log("HERE", svgRef.current);
+
+      const image = (svgRef.current as HTMLElement).querySelector(
+        "#background"
+      );
+      console.log("HERE IMAGE", image);
+      // images.forEach((element) => {
+      //   if (element.id != null) {
+      //     console.log(element.id, element);
+      //   }
+      // if (inactive !== true) {
+      //   element.classList.add("myPath");
+      //   element.addEventListener("click", clickHandler);
+      // }
+      // });
+    }
+  }, [svgRef.current]);
 
   return (
     <div className="size-full items-center grid grid-cols-[64px_auto_64px] gap-2 border-t border-gray-300 relative">
@@ -97,7 +118,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                   ></div>
                 </div>
                 <div
-                  className={`size-18 rounded-full overflow-hidden bg-slate-50 relative cursor-pointer shadow-md items-center ${
+                  className={`size-18 rounded-full overflow-hidden relative cursor-pointer shadow-md items-center bg-white ${
                     selectedPainting === i && selectedGroup == null
                       ? "border-3 border-gray-400"
                       : ""
@@ -107,6 +128,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                     dispatch(setSelectedGroup(null));
                     dispatch(setSelectedPainting(i));
                   }}
+                  ref={svgRef}
                 >
                   <SVG
                     src={e.svgFile}
@@ -125,14 +147,43 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                       tmpInteractiveElements[i.toString()] = tmpIE;
                       setInteractiveElements(tmpInteractiveElements);
 
-                      const newCode = code.replaceAll(
+                      let newCode = code.replaceAll(
                         '_image"',
-                        '_image" class="myimage"'
+                        '_image" class="mythumbnailimage"'
                       );
 
-                      return newCode.replaceAll('id="', 'id="timeline-');
+                      newCode = newCode.replaceAll(
+                        'background"',
+                        'background" class="mybackground"'
+                      );
+                      return newCode.replaceAll('id="', `id="timeline-${i}`);
                     }}
                   />
+                  <svg className="size-full absolute top-0 left-0">
+                    <filter id={`timeline-roughpaper-${i}`}>
+                      <feTurbulence
+                        type="fractalNoise"
+                        baseFrequency="0.04"
+                        result="noise"
+                        numOctaves="5"
+                      />
+
+                      <feDiffuseLighting
+                        in="noise"
+                        lightingColor="#fff"
+                        surfaceScale="2"
+                      >
+                        <feDistantLight azimuth="45" elevation="60" />
+                      </feDiffuseLighting>
+                    </filter>
+                    <rect
+                      width={"100%"}
+                      height={"100%"}
+                      filter="url(#roughpaper-sidebar)"
+                      opacity={0.3}
+                      fill="white"
+                    />
+                  </svg>
                 </div>
                 {selectedPainting === i &&
                   interactiveElements[i.toString()] != null &&

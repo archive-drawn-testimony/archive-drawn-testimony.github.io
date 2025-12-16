@@ -6,6 +6,13 @@
         "location": "Odense, Denmark",
         "time": "1943"
     },
+    "young": {
+        "title": "Steen Metz",
+        "subtitle": null,
+        "text": null,
+        "location": null,
+        "time": "1935 - 1943"
+    },
     "transport": {
         "title": "Transport to Theresienstadt",
         "subtitle": "A Three-Day Journey",
@@ -33,6 +40,13 @@
         "text": "Steen was only nine years old when he was in Theresienstadt. As a young boy, he spent his time delivering messages in the camp and playing soccer with the other children. Click on the interactive objects to find out more.",
         "location": "Theresienstadt, Czechoslovakia",
         "time": "1943 - 1945"
+    },
+    "hjallesevej": {
+        "title": "Living in Odense",
+        "subtitle": null,
+        "text": null,
+        "location": null,
+        "time": "1935 - 1943"
     },
     "ball_x5F_group": {
         "title": "The Soccer Field",
@@ -90,5 +104,4 @@
         "location": "Theresienstadt, Czechoslovakia",
         "time": "February 1944 - June 1944"
     }
-    
 }
