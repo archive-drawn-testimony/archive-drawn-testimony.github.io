@@ -10,9 +10,30 @@
         "title": "Steen Metz",
         "subtitle": null,
         "text": null,
-        "location": null,
+        "location": "Odense, Denmark",
         "time": "1935 - 1943"
     },
+    "steenphoto_x5F_group": {
+        "title": "Steen Metz",
+        "subtitle": null,
+        "text": "This photograph shows Steen Axel Metz holding ice cream. He is photographed in a park the summer before he and his family are arrested.",
+        "location": "Odense, Denmark",
+        "time": "1935 - 1943"   
+    },
+    "familyphoto_x5F_group": {
+        "title": "Steen Metz",
+        "subtitle": null,
+        "text": "This photograph shows Steen Axel Metz, his father Axel Mogens Metz, and his grandmother. They are seated in front of their appartment on the Hjallesevej in Odense.",
+        "location": "Odense, Denmark",
+        "time": "1935 - 1943"
+    },    
+    "hjallesevej": {
+        "title": "Living in Odense",
+        "subtitle": null,
+        "text": null,
+        "location": null,
+        "time": "1935 - 1943"
+    },    
     "transport": {
         "title": "Transport to Theresienstadt",
         "subtitle": "A Three-Day Journey",
@@ -37,16 +58,9 @@
     "soccer": {
         "title": "Playing Soccer",
         "subtitle": "Life in Theresienstadt",
-        "text": "Steen was only nine years old when he was in Theresienstadt. As a young boy, he spent his time delivering messages in the camp and playing soccer with the other children. Click on the interactive objects to find out more.",
+        "text": "Steen was only nine years old when he was in Theresienstadt. As a young boy, he spent his time delivering messages in the camp and playing soccer with the other children.\n\nClick on the interactive objects to find out more.",
         "location": "Theresienstadt, Czechoslovakia",
         "time": "1943 - 1945"
-    },
-    "hjallesevej": {
-        "title": "Living in Odense",
-        "subtitle": null,
-        "text": null,
-        "location": null,
-        "time": "1935 - 1943"
     },
     "ball_x5F_group": {
         "title": "The Soccer Field",
@@ -72,7 +86,7 @@
     "whitebus": {
         "title": "Happier Times",
         "subtitle": "Liberation by the White Busses",
-        "text": "The Danish Jews were liberated on the 15th of April by the White Busses. Click on the interactive objects to find out more.",
+        "text": "The Danish Jews were liberated on the 15th of April by the White Busses.\n\nClick on the interactive objects to find out more.",
         "location": "Theresienstadt, Czechoslovakia",
         "time": "15 April 1945"
     },
