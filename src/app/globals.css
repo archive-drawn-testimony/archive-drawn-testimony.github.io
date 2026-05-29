@@ -237,6 +237,11 @@ input:checked + .slider:before {
   }
 }
 
+.shadowless {
+    -webkit-filter: none !important;
+    filter: none !important;
+  }
+
 .fade-stroke-animation {
   /* stroke: rgb(223, 164, 76);
   stroke-width: 1px; */

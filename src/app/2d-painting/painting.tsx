@@ -262,6 +262,15 @@ export default function Painting(props: PaintingProps) {
     });
   }
 
+  function setupShadowlessImages(group: SVGElement) {
+    const images = group.querySelectorAll("image");
+    images.forEach((element) => {
+      if ((element as SVGImageElement).id.includes("shadowless")) {
+        (element as SVGImageElement).classList.add("shadowless");
+      }
+    });
+  }
+
   function clickInteractiveElement(e: SVGPathElement) {
     resetSelectedElements();
 
@@ -270,6 +279,7 @@ export default function Painting(props: PaintingProps) {
     const group = pathGroup.parentElement as HTMLElement;
     group.classList.add("selected");
 
+    setupShadowlessImages(group as unknown as SVGAElement)
     setHiddenImages(group as unknown as SVGElement, false);
     dispatch(setSelectedGroup(group.id));
     zoomToElement(clickedID);
@@ -382,8 +392,8 @@ export default function Painting(props: PaintingProps) {
       // Do what you want to do when the size of the element changes
       setSvgWrapperSize(
         nodes[0]?.contentRect ??
-          (nodes[0].target as HTMLElement)?.getBoundingClientRect() ??
-          null
+        (nodes[0].target as HTMLElement)?.getBoundingClientRect() ??
+        null
       );
     });
     resizeObserver.observe(svgRef.current);
@@ -489,14 +499,10 @@ export default function Painting(props: PaintingProps) {
               const svgSize = getSvgDimensionsFromString(code);
               code = code.replaceAll(
                 "</svg>",
-                `<filter id='roughpaper'><feTurbulence type="fractalNoise" baseFrequency='0.04' result='noise' numOctaves="5" /><feDiffuseLighting in='noise' lighting-color='#fff' surfaceScale='2'><feDistantLight azimuth='45' elevation='60' /></feDiffuseLighting></filter><rect id="paper-rect" x="-50%" y="-50%" width="${
-                  (svgSize.width as number) * 2
-                }" height="${
-                  (svgSize.height as number) * 2
-                }" filter="url(#roughpaper)" opacity="0.3" pointer-events="none"/><rect id="viewbox-rect" x="0" y="0" width="${
-                  svgSize.width as number
-                }" height="${
-                  svgSize.height as number
+                `<filter id='roughpaper'><feTurbulence type="fractalNoise" baseFrequency='0.04' result='noise' numOctaves="5" /><feDiffuseLighting in='noise' lighting-color='#fff' surfaceScale='2'><feDistantLight azimuth='45' elevation='60' /></feDiffuseLighting></filter><rect id="paper-rect" x="-50%" y="-50%" width="${(svgSize.width as number) * 2
+                }" height="${(svgSize.height as number) * 2
+                }" filter="url(#roughpaper)" opacity="0.3" pointer-events="none"/><rect id="viewbox-rect" x="0" y="0" width="${svgSize.width as number
+                }" height="${svgSize.height as number
                 }" fill="transparent" pointer-events="none"/>`
               );
               return code;
