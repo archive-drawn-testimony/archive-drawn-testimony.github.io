@@ -82,7 +82,7 @@ export function PaintingAudio(props: PaintingAudioProps) {
     const progress = duration ? (currentTime / duration) * 100 : 0;
 
     return (
-        <div className="w-full pr-4">
+        <div className="w-11/12">
             <audio
                 ref={audioRef}
                 src={src}
@@ -158,7 +158,7 @@ export function PaintingAudio(props: PaintingAudioProps) {
                         </div>
 
                         {/* Time */}
-                        <div className="font-bold tabular-nums">
+                        <div className="text-xs tabular-nums">
                             {formatTime(currentTime)}/{formatTime(duration)}
                         </div>
                     </div>
