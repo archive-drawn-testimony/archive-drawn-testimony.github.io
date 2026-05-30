@@ -128,16 +128,16 @@ export function PaintingAudio(props: PaintingAudioProps) {
                             <button
                                 type="button"
                                 onClick={togglePlay}
-                                className="flex h-6 w-6 items-center justify-center transition hover:text-slate-500 cursor-pointer"
+                                className="flex h-4 w-4 items-center justify-center transition hover:text-slate-500 cursor-pointer"
                                 aria-label={isPlaying ? "Pause audio" : "Play audio"}
                             >
                                 {isPlaying ? (
                                     <span className="flex gap-1">
-                                        <span className="h-5 w-2 bg-current" />
-                                        <span className="h-5 w-2 bg-current" />
+                                        <span className="h-4 w-1.5 bg-current" />
+                                        <span className="h-4 w-1.5 bg-current" />
                                     </span>
                                 ) : (
-                                    <span className="ml-1 h-0 w-0 border-y-[12px] border-l-[20px] border-y-transparent border-l-current" />
+                                    <span className="ml-1 h-0 w-0 border-y-[9px] border-l-[18px] border-y-transparent border-l-current" />
                                 )}
                             </button>
 
@@ -150,7 +150,7 @@ export function PaintingAudio(props: PaintingAudioProps) {
                                     step="0.01"
                                     value={volume}
                                     onChange={handleVolumeChange}
-                                    className="w-20 accent-black"
+                                    className="w-20 accent-black h-2"
                                     aria-label="Volume"
                                 />
                                 <SpeakerIcon />
@@ -177,7 +177,7 @@ function SpeakerIcon(props: SpeackerProps) {
     return (
         <svg
             viewBox="0 0 64 64"
-            className="h-8 w-8 fill-current"
+            className="h-6 w-6 fill-current"
             aria-hidden="true"
             onClick={onClick}
         >
