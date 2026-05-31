@@ -275,14 +275,21 @@ export default function Painting(props: PaintingProps) {
     resetSelectedElements();
 
     const clickedID = e.id;
-    const pathGroup = e.parentElement as HTMLElement;
-    const group = pathGroup.parentElement as HTMLElement;
+    const group = e.closest("g[id$='_group']") as SVGElement | null;
+
+    if (group == null) {
+      return;
+    }
+
     group.classList.add("selected");
 
     setupShadowlessElements(group as unknown as SVGElement);
     setHiddenImages(group as unknown as SVGElement, false);
     dispatch(setSelectedGroup(group.id));
-    zoomToElement(clickedID);
+
+    if (clickedID !== "") {
+      zoomToElement(clickedID);
+    }
   }
 
   const clickHandler = (e: Event) => {
@@ -441,7 +448,7 @@ export default function Painting(props: PaintingProps) {
 
       const paths = (svgRef.current as SVGSVGElement).querySelectorAll("path");
       paths.forEach((element) => {
-        if (element.id == null) {
+        if (!element.id) {
           element.id = nanoid(4);
         }
         if (inactive !== true) {
