@@ -39,6 +39,74 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
     Record<string, Array<string>>
   >({});
 
+  const currentInteractiveElements =
+    interactiveElements[selectedPainting.toString()] ?? [];
+
+  const selectedGroupIndex =
+    selectedGroup != null
+      ? currentInteractiveElements.indexOf(selectedGroup)
+      : -1;
+
+  const previousInteractiveElements =
+    selectedPainting > 0
+      ? interactiveElements[(selectedPainting - 1).toString()] ?? []
+      : [];
+
+  const canNavigatePrevious = selectedPainting > 0 || selectedGroup != null;
+  const canNavigateNext =
+    selectedGroupIndex >= 0
+      ? selectedGroupIndex + 1 < currentInteractiveElements.length ||
+        selectedPainting + 1 < paintings.length
+      : currentInteractiveElements.length > 0 ||
+        selectedPainting + 1 < paintings.length;
+
+  function navigatePrevious() {
+    if (selectedGroupIndex > 0) {
+      dispatch(
+        setSelectedGroup(currentInteractiveElements[selectedGroupIndex - 1])
+      );
+      return;
+    }
+
+    if (selectedGroupIndex === 0) {
+      dispatch(setSelectedGroup(null));
+      return;
+    }
+
+    if (selectedPainting > 0) {
+      const previousPainting = selectedPainting - 1;
+      dispatch(setSelectedPainting(previousPainting));
+      dispatch(
+        setSelectedGroup(
+          previousInteractiveElements[previousInteractiveElements.length - 1] ??
+            null
+        )
+      );
+    }
+  }
+
+  function navigateNext() {
+    if (
+      selectedGroupIndex >= 0 &&
+      selectedGroupIndex + 1 < currentInteractiveElements.length
+    ) {
+      dispatch(
+        setSelectedGroup(currentInteractiveElements[selectedGroupIndex + 1])
+      );
+      return;
+    }
+
+    if (selectedGroup == null && currentInteractiveElements.length > 0) {
+      dispatch(setSelectedGroup(currentInteractiveElements[0]));
+      return;
+    }
+
+    if (selectedPainting + 1 < paintings.length) {
+      dispatch(setSelectedPainting(selectedPainting + 1));
+      dispatch(setSelectedGroup(null));
+    }
+  }
+
   useEffect(() => {
     if (svgRef.current != null) {
       const image = (svgRef.current as HTMLElement).querySelector(
@@ -79,14 +147,10 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
           fill="white"
         />
       </svg>
-      {selectedPainting > 0 && (
+      {canNavigatePrevious && (
         <div
           className="rounded-full px-2 size-16 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer items-center justify-center flex"
-          onClick={() => {
-            dispatch(
-              setSelectedPainting((selectedPainting - 1) % paintings.length)
-            );
-          }}
+          onClick={navigatePrevious}
         >
           <ChevronLeftIcon className="size-7" />
         </div>
@@ -218,14 +282,10 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
           );
         })}
       </div>
-      {selectedPainting + 1 < paintings.length && (
+      {canNavigateNext && (
         <div
           className="px-2 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer size-16 rounded-full justify-center items-center flex"
-          onClick={() => {
-            dispatch(
-              setSelectedPainting((selectedPainting + 1) % paintings.length)
-            );
-          }}
+          onClick={navigateNext}
         >
           <ChevronRightIcon className="size-7" />
         </div>
