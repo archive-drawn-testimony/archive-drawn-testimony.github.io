@@ -43,6 +43,7 @@
     "time": "2 October 1943",
     "map": {
       "title": "From Odense to Theresienstadt with the borders of 1938.",
+      "mapyear": 1939,
       "start": {
         "lat": 55.381537446534686,
         "lon": 10.395795592972672
@@ -130,7 +131,8 @@
     "location": "Theresienstadt, Czechoslovakia",
     "time": "15 April 1945",
     "map": {
-      "title": "From Theresienstadt to Odense",
+      "title": "From Theresienstadt to Odense with the borders of 1938.",
+      "mapyear": 1938,
       "start": {
         "lat": 50.51061972769558,
         "lon": 14.149830134701624

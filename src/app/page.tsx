@@ -70,6 +70,7 @@ function renderStoryText(text: string) {
 
 export interface MapEntry {
   title: string;
+  mapyear?: number;
   start: { lat: number, lon: number, title: string };
   end?: { lat: number, lon: number, title: string };
 }
@@ -201,7 +202,7 @@ function MainMenu() {
                     </div>
                     {story.map && <div className="text-sm flex gap-1 flex-col z-0">
                       <div className="h-[300px] w-full border-2 border-gray-300 rounded-md opacity-90">
-                        <PaintingMap start={story.map.start} end={story.map.end} />
+                        <PaintingMap start={story.map.start} end={story.map.end} mapyear={story.map.mapyear} />
                       </div>
                       <div className="opacity-75">
                         {story.map.title && <span>{story.map.title}</span>}

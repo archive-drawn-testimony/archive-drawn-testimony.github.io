@@ -22,12 +22,14 @@ interface PaintingMapProps {
     className?: string;
     start: { lat: number, lon: number }
     end?: { lat: number, lon: number }
+    mapyear?: number;
 }
 
 const travelAnimationDurationMs = 4500;
 const travelReplayPauseMs = 1300;
 const singlePointBoundsPaddingDegrees = 2;
 const minimumLabelArea = 0.2;
+const availableHistoricalMapYears = [1938, 1945];
 
 const emptyCountryLabels: CountryLabelFeatureCollection = {
     type: "FeatureCollection",
@@ -313,6 +315,22 @@ function createCountryLabelFeatures(data: FeatureCollection<Polygon | MultiPolyg
     };
 }
 
+function getHistoricalMapYear(mapyear?: number) {
+    if (mapyear == null) {
+        return availableHistoricalMapYears[0];
+    }
+
+    const matchingYear = availableHistoricalMapYears
+        .filter((availableYear) => availableYear <= mapyear)
+        .at(-1);
+
+    return matchingYear ?? availableHistoricalMapYears[0];
+}
+
+function getHistoricalMapUrl(mapyear?: number) {
+    return `/maps/world_${getHistoricalMapYear(mapyear)}.geojson`;
+}
+
 function createTravelBounds(start: LngLatPosition, end?: LngLatPosition): TravelBounds {
     if (end == null || (start[0] === end[0] && start[1] === end[1])) {
         return [
@@ -349,6 +367,7 @@ export function PaintingMap(props: PaintingMapProps) {
     const startPosition = useMemo(() => toPosition(props.start), [props.start.lat, props.start.lon]);
     const endPosition = useMemo(() => props.end ? toPosition(props.end) : undefined, [props.end?.lat, props.end?.lon]);
     const travelBounds = useMemo(() => createTravelBounds(startPosition, endPosition), [startPosition, endPosition]);
+    const historicalMapUrl = useMemo(() => getHistoricalMapUrl(props.mapyear), [props.mapyear]);
 
     const routeFeature = useMemo(() => {
         if (endPosition == null) {
@@ -377,18 +396,25 @@ export function PaintingMap(props: PaintingMapProps) {
     useEffect(() => {
         let isMounted = true;
 
-        fetch("/maps/world_1938.geojson")
+        setCountryLabels(emptyCountryLabels);
+
+        fetch(historicalMapUrl)
             .then((response) => response.json())
             .then((data: FeatureCollection<Polygon | MultiPolygon, World1938Properties>) => {
                 if (isMounted) {
                     setCountryLabels(createCountryLabelFeatures(data));
+                }
+            })
+            .catch(() => {
+                if (isMounted) {
+                    setCountryLabels(emptyCountryLabels);
                 }
             });
 
         return () => {
             isMounted = false;
         };
-    }, []);
+    }, [historicalMapUrl]);
 
     useEffect(() => {
         if (endPosition == null) {
@@ -456,7 +482,7 @@ export function PaintingMap(props: PaintingMapProps) {
                     fitMapToTravelBounds(event.target, travelBounds);
                 }}
             >
-                <Source id="world1938" type="geojson" data="/maps/world_1938.geojson">
+                <Source id="world1938" type="geojson" data={historicalMapUrl}>
                     <Layer {...world1938FillLayer} />
                     <Layer {...world1938BorderLayer} />
                 </Source>
