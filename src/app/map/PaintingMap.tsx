@@ -1,13 +1,22 @@
 "use client";
 
 import Map, { Layer, Source, type LayerProps, type MapRef } from "@vis.gl/react-maplibre";
-import type { Feature, LineString, Point } from "geojson";
+import type { Feature, FeatureCollection, LineString, MultiPolygon, Point, Polygon, Position } from "geojson";
 import type { StyleSpecification } from "maplibre-gl";
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type LngLatPosition = [number, number];
 type TravelBounds = [LngLatPosition, LngLatPosition];
 type TravelBoundsFitter = Pick<MapRef, "fitBounds">;
+type World1938Properties = {
+    NAME?: string;
+    [key: string]: unknown;
+};
+type CountryLabelProperties = World1938Properties & {
+    labelArea: number;
+    labelTier: "large" | "medium" | "small" | "tiny" | "micro";
+};
+type CountryLabelFeatureCollection = FeatureCollection<Point, CountryLabelProperties>;
 
 interface PaintingMapProps {
     className?: string;
@@ -18,10 +27,17 @@ interface PaintingMapProps {
 const travelAnimationDurationMs = 4500;
 const travelReplayPauseMs = 1300;
 const singlePointBoundsPaddingDegrees = 2;
+const minimumLabelArea = 0.2;
+
+const emptyCountryLabels: CountryLabelFeatureCollection = {
+    type: "FeatureCollection",
+    features: [],
+};
 
 const transparentMapStyle: StyleSpecification = {
     version: 8,
     name: "Transparent historical borders",
+    glyphs: "https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf",
     sources: {},
     layers: [
         {
@@ -52,6 +68,60 @@ const world1938FillLayer: LayerProps = {
         "fill-opacity": 1.0
     },
 };
+
+function createWorld1938LabelLayer(
+    id: string,
+    labelTier: CountryLabelProperties["labelTier"],
+    minzoom: number
+): LayerProps {
+    return {
+        id,
+        type: "symbol",
+        minzoom,
+        filter: ["==", ["get", "labelTier"], labelTier],
+        layout: {
+            "text-field": ["get", "NAME"],
+            "text-font": ["Noto Sans Regular"],
+            "text-size": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                1,
+                8,
+                4,
+                13,
+            ],
+            // "text-transform": "uppercase",
+            "text-letter-spacing": 0.08,
+            "text-max-width": 8,
+            "text-allow-overlap": false,
+            "text-ignore-placement": false,
+        },
+        paint: {
+            "text-color": "#3d3d3d",
+            "text-opacity": [
+                "interpolate",
+                ["linear"],
+                ["zoom"],
+                1,
+                0.45,
+                3,
+                0.85,
+            ],
+            "text-halo-color": "#ffffff",
+            "text-halo-width": 1,
+            "text-halo-blur": 0.5,
+        },
+    };
+}
+
+const world1938LabelLayers = [
+    createWorld1938LabelLayer("world-1938-labels-large", "large", 0),
+    createWorld1938LabelLayer("world-1938-labels-medium", "medium", 0),
+    createWorld1938LabelLayer("world-1938-labels-small", "small", 0),
+    createWorld1938LabelLayer("world-1938-labels-tiny", "tiny", 0),
+    createWorld1938LabelLayer("world-1938-labels-micro", "micro", 5),
+];
 
 const fullTravelRouteLayer: LayerProps = {
     id: "full-travel-route",
@@ -124,6 +194,125 @@ function createPointFeature(coordinate: LngLatPosition): Feature<Point> {
     };
 }
 
+function isLngLatPosition(position: Position): position is LngLatPosition {
+    return typeof position[0] === "number" && typeof position[1] === "number";
+}
+
+function getOuterRing(polygon: Position[][]) {
+    return polygon[0]?.filter(isLngLatPosition) ?? [];
+}
+
+function getSignedRingArea(ring: LngLatPosition[]) {
+    if (ring.length < 3) {
+        return 0;
+    }
+
+    let area = 0;
+
+    for (let i = 0; i < ring.length; i += 1) {
+        const current = ring[i];
+        const next = ring[(i + 1) % ring.length];
+        area += current[0] * next[1] - next[0] * current[1];
+    }
+
+    return area / 2;
+}
+
+function getRingCentroid(ring: LngLatPosition[]): LngLatPosition {
+    const signedArea = getSignedRingArea(ring);
+
+    if (signedArea === 0) {
+        const total = ring.reduce<LngLatPosition>(
+            (sum, coordinate) => [sum[0] + coordinate[0], sum[1] + coordinate[1]],
+            [0, 0]
+        );
+
+        return [total[0] / ring.length, total[1] / ring.length];
+    }
+
+    let longitude = 0;
+    let latitude = 0;
+
+    for (let i = 0; i < ring.length; i += 1) {
+        const current = ring[i];
+        const next = ring[(i + 1) % ring.length];
+        const factor = current[0] * next[1] - next[0] * current[1];
+        longitude += (current[0] + next[0]) * factor;
+        latitude += (current[1] + next[1]) * factor;
+    }
+
+    const scale = 1 / (6 * signedArea);
+    return [longitude * scale, latitude * scale];
+}
+
+function getLabelTier(labelArea: number): CountryLabelProperties["labelTier"] | undefined {
+    if (labelArea >= 100) {
+        return "large";
+    }
+
+    if (labelArea >= 20) {
+        return "medium";
+    }
+
+    if (labelArea >= 5) {
+        return "small";
+    }
+
+    if (labelArea >= 1) {
+        return "tiny";
+    }
+
+    if (labelArea >= minimumLabelArea) {
+        return "micro";
+    }
+
+    return undefined;
+}
+
+function createCountryLabelFeatures(data: FeatureCollection<Polygon | MultiPolygon, World1938Properties>): CountryLabelFeatureCollection {
+    const features: CountryLabelFeatureCollection["features"] = [];
+
+    data.features.forEach((feature) => {
+        const name = feature.properties?.NAME;
+
+        if (name == null) {
+            return;
+        }
+
+        const polygons = feature.geometry.type === "Polygon"
+            ? [feature.geometry.coordinates]
+            : feature.geometry.coordinates;
+
+        polygons.forEach((polygon) => {
+            const ring = getOuterRing(polygon);
+            const labelArea = Math.abs(getSignedRingArea(ring));
+            const labelTier = getLabelTier(labelArea);
+
+            if (ring.length < 3 || labelTier == null) {
+                return;
+            }
+
+            features.push({
+                type: "Feature",
+                properties: {
+                    ...feature.properties,
+                    labelArea,
+                    labelTier,
+                },
+                geometry: {
+                    type: "Point",
+                    coordinates: getRingCentroid(ring),
+                },
+            });
+        });
+    });
+
+    return {
+        type: "FeatureCollection",
+        features,
+    };
+}
+
 function createTravelBounds(start: LngLatPosition, end?: LngLatPosition): TravelBounds {
     if (end == null || (start[0] === end[0] && start[1] === end[1])) {
         return [
@@ -155,6 +344,7 @@ function fitMapToTravelBounds(map: TravelBoundsFitter, bounds: TravelBounds) {
 export function PaintingMap(props: PaintingMapProps) {
     const mapRef = useRef<MapRef | null>(null);
     const [animationProgress, setAnimationProgress] = useState(props.end ? 0 : 1);
+    const [countryLabels, setCountryLabels] = useState<CountryLabelFeatureCollection>(emptyCountryLabels);
 
     const startPosition = useMemo(() => toPosition(props.start), [props.start.lat, props.start.lon]);
     const endPosition = useMemo(() => props.end ? toPosition(props.end) : undefined, [props.end?.lat, props.end?.lon]);
@@ -183,6 +373,22 @@ export function PaintingMap(props: PaintingMapProps) {
     const travelPointFeature = useMemo(() => {
         return createPointFeature(currentPosition);
     }, [currentPosition]);
+
+    useEffect(() => {
+        let isMounted = true;
+
+        fetch("/maps/world_1938.geojson")
+            .then((response) => response.json())
+            .then((data: FeatureCollection<Polygon | MultiPolygon, World1938Properties>) => {
+                if (isMounted) {
+                    setCountryLabels(createCountryLabelFeatures(data));
+                }
+            });
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     useEffect(() => {
         if (endPosition == null) {
@@ -253,6 +459,11 @@ export function PaintingMap(props: PaintingMapProps) {
                 <Source id="world1938" type="geojson" data="/maps/world_1938.geojson">
                     <Layer {...world1938FillLayer} />
                     <Layer {...world1938BorderLayer} />
+                </Source>
+                <Source id="world1938Labels" type="geojson" data={countryLabels}>
+                    {world1938LabelLayers.map((layer) => (
+                        <Layer key={layer.id} {...layer} />
+                    ))}
                 </Source>
                 <Source id="fullTravelRoute" type="geojson" data={routeFeature}>
                     <Layer {...fullTravelRouteLayer} />
