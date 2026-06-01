@@ -30,31 +30,31 @@
   },
   "hjallesevej": {
     "title": "The Arrest",
-    "subtitle": "A not so normal life anymore.",
-    "text": "In April 1940, the same month German forces occupied Denmark, nine-year-old Steen and his family moved into a new apartment on Hjallesevej in Odense. Life continued as normal, Steen helped the milkman with his deliveries, and in 1942 he started school. But by the time he reached third class, Steen and his parents were arrested by the Nazis and taken from their home.\n\nClick on the interactive objects in the drawing to find out more.",
+    "subtitle": "Denmark under German Occupation",
+    "text": "In April 1940, the same month German forces occupied Denmark, nine-year-old Steen and his family moved into a new apartment on Hjallesevej in Odense. Life continued as normal, Steen helped the milkman with his deliveries, and in 1942 he started school. But by the time he reached third class, Steen and his parents were arrested by the Nazis and taken from their home.\n\nClick on the interactive objects to find out more.",
     "location": "Odense, Denmark",
-    "time": "1935 - 1943"
+    "time": "2 October 1943"
   },
-  "bakery_x5F_group": {
+  "door_x5F_group": {
     "title": "The Arrest",
-    "subtitle": null,
-    "text": null,
+    "subtitle": "A Knock at the Door",
+    "text": "In the early morning of 2 October 1943, during the Jewish holiday Rosh Hashanah, Steen and his family hear a knock at their door. Steen later recalled his father opening it to find two Nazis in green uniforms standing in the hallway.",
     "location": "Odense, Denmark",
-    "time": "1935 - 1943"
+    "time": "October 1943"
   },
-  "side_x5F_window_x5F_group": {
+  "baker_x5F_group": {
     "title": "The Arrest",
-    "subtitle": null,
-    "text": null,
+    "subtitle": "The Baker Downstairs",
+    "text": "Steen and his mother were permitted to collect a care package from the baker downstairs, while his father held upstairs under guard. They received a sack filled with Danish bread and pastries. Steen's mother, Magna, later recalled the large number of loaves they were given. After his return, Steen learned that the baker had offered to help them escape through the tunnels beneath the apartment. However, they could not have accepted as it would most likely have led to the baker and his father being shot.",
     "location": "Odense, Denmark",
-    "time": "1935 - 1943"
+    "time": "October 1943"
   },
-  "front_x5F_window_x5F_group": {
+  "vestreskole_x5F_group": {
     "title": "The Arrest",
-    "subtitle": null,
-    "text": null,
+    "subtitle": "The Journey to Theresienstadt",
+    "text": "A group of around sixty Danish Jews, including Steen and his family, were assembled at the local school Vestre Skole before being transported to the nearby city of Kolding and later to Theresienstadt ghetto.",
     "location": "Odense, Denmark",
-    "time": "1935 - 1943"
+    "time": "October 1943"
   },
   "transport": {
     "title": "Transport to Theresienstadt",
