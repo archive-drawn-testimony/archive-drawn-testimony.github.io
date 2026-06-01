@@ -30,6 +30,17 @@ body {
     /* background-image: url(/assets/paper-texture.jpg); */
 }
 
+* {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
+  height: 0;
+  width: 0;
+}
+
 main {
   height: 100%;
   max-height: 100%;
