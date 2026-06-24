@@ -87,6 +87,9 @@
         "caption": "This is a longer caption of the image shoing a cattlecar for deportation."
       },
       {
+        "image": "/images/data/trainstation",
+        "caption": "Postcard of the Theresienstadt-Bauschowitz train station in 1907, where prisoners would arrive before the construction of a station in Theresienstadt."
+      {
         "image": "/images/data/station-people.png",
         "caption": "Station and people"
       },
