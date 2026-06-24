@@ -70,7 +70,7 @@ export interface PaintingProps {
 }
 
 export default function Painting(props: PaintingProps) {
-  const { svgFile, inactive = false, discoveredStoryKeys = [] } = props;
+  const { svgFile, inactive = false } = props;
 
   if (svgFile == null) {
     return <div>No SVG path.</div>;
@@ -115,7 +115,11 @@ export default function Painting(props: PaintingProps) {
 
       if (element != null && svg) {
         (element as HTMLElement).classList.add("highlighted");
-        const bbox = (element as SVGGraphicsElement).getBBox();
+        const zoomTarget =
+          ((element as SVGGraphicsElement).closest(
+            "g[id$='_group']"
+          ) as SVGGraphicsElement | null) ?? (element as SVGGraphicsElement);
+        const bbox = zoomTarget.getBBox();
         const padding =
           (parseInt(svg.getAttribute("width") as string) / 200) * 10;
 
@@ -268,26 +272,6 @@ export default function Painting(props: PaintingProps) {
     elements.forEach((element) => {
       if ((element as SVGElement).id.includes("shadowless")) {
         (element as SVGElement).classList.add("shadowless");
-      }
-    });
-  }
-
-  function updateDiscoveredElements() {
-    const svg = svgRef.current as SVGSVGElement | null;
-
-    if (svg == null) {
-      return;
-    }
-
-    svg.querySelectorAll(".discovered").forEach((element) => {
-      (element as SVGElement).classList.remove("discovered");
-    });
-
-    discoveredStoryKeys.forEach((storyKey) => {
-      const group = svg.querySelector(`#${storyKey}`);
-
-      if (group != null) {
-        group.classList.add("discovered");
       }
     });
   }
@@ -481,10 +465,6 @@ export default function Painting(props: PaintingProps) {
       resetView();
     }
   }, [svgRef.current, loaded]);
-
-  useEffect(() => {
-    updateDiscoveredElements();
-  }, [discoveredStoryKeys, loaded]);
 
   const selectedGroup = useSelector((state: State) => state.app.selectedGroup);
 

@@ -177,7 +177,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                 key={`timeline-title-${i}`}
                 className={`text-xs row-start-1 py-1 ${noto_serif.className}`}
               >
-                {story?.title}
+                {story?.shorttitle != null ? story.shorttitle : story?.title}
               </div>
               <div
                 key={`timeline-image-${i}`}

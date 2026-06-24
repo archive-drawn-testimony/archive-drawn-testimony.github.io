@@ -87,6 +87,7 @@ export interface StoryEntry {
   audio?: string;
   map?: MapEntry;
   data?: Record<string, string>
+  shorttitle?: string;
 }
 
 function MainMenu() {

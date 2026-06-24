@@ -290,7 +290,7 @@ input:checked + .slider:before {
   stroke: rgb(0, 0, 0);
   stroke-width: 2px;
   stroke-opacity: 50%;
-  fill: rgba(238, 238, 238, 0.1) !important;
+  fill: rgba(238, 238, 238, 0.1);
   cursor: pointer;
   -webkit-filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
   filter: drop-shadow( 0px 0px 70px rgba(0, 0, 0, .7));
