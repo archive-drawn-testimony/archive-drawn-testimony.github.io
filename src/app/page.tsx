@@ -147,6 +147,9 @@ function MainMenu() {
 
   const story = useMemo(() => {
     if (storyData != null && selectedStoryKey != null) {
+      if (storyData[selectedStoryKey].data == null) {
+        setDataView(false);
+      }
       return storyData[selectedStoryKey];
     } else {
       return {
@@ -184,8 +187,8 @@ function MainMenu() {
       {dataView && story.data != null ?
         <>
           {story.data.map((e: any) => <div className="border-black border-0">
-            {e.image && <div className="flex items-center cursor-zoom-in">
-              <img onClick={() => { setFocusData(e) }} className="w-full" src={e.image} />
+            {e.image && <div className="flex items-center cursor-zoom-in mb-1">
+              <img onClick={() => { setFocusData(e) }} className="w-full z-50" src={e.image} />
             </div>}
             {e.caption && <div>{e.caption}</div>}
             {e.copyright && <div>&copy;{e.copyright}</div>}

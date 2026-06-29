@@ -8,9 +8,9 @@
     "time": "1943",
     "data": [
       {
-        "image": "/images/data/steen.png",
-        "caption": "Steen Metz",
-        "copyright": "Steen Metz"
+        "image": "/images/data/steen.jpg",
+        "caption": "Holocaust survivor Steen Metz at his home on Feb. 3, 2022, in Barrington.",
+        "copyright": "Stacey Wescott / Chicago Tribune"
       }
     ]
   },
@@ -20,28 +20,64 @@
     "text": "Steen and his parents lived in the Stovesberg apartment complex at Hjallesevej 98 in Odense, Denmark. Despite food rationing under the occupation, the family maintained an almost normal daily life.\n\nClick on the interactive objects in the drawing to find out more.",
     "location": "Odense, Denmark",
     "time": "1935 - 1943",
-    "audio": "almost-normal-life.mp3"
+    "audio": "almost-normal-life.mp3",
+    "data": [
+      {
+        "image": "/images/data/icecream.jpg",
+        "caption": "Steen Metz, age 8, eating an ice cream cone.",
+        "copyright": "IHMEC: courtesy of Steen Metz"
+      },
+      {
+        "image": "/images/data/family.jpg",
+        "caption": "Steen Metz (around age 6), sitting with his grandmother, Betty Metz, and his father, Axel Metz.",
+        "copyright": "IHMEC: courtesy of Steen Metz"
+      }
+    ]
   },
   "steenphoto_x5F_group": {
     "title": "Steen Metz",
     "subtitle": "The Summer Before the Arrest",
     "text": "Pictured here at the age of eight, Steen is photographed eating ice cream during the summer before his family's arrest. He later recalled the relative normalcy of those years:\n\nquote(I cycled to and from school. I often met Nazi soldiers – they never spoke to me or touched me.)",
     "location": "Odense, Denmark",
-    "time": "1935 - 1943"
+    "time": "1935 - 1943",
+    "data": [
+      {
+        "image": "/images/data/icecream.jpg",
+        "caption": "Steen Metz, age 8, eating an ice cream cone.",
+        "copyright": "IHMEC: courtesy of Steen Metz"
+      }
+    ]
   },
   "familyphoto_x5F_group": {
     "title": "Steen Metz",
     "subtitle": "Living at Stovesberg",
     "text": "This photograph shows Steen Axel Metz with his father, Axel Mogens Metz, and his grandmother, seated on a stone wall outside their apartment on Hjallesevej. Steen retained fond memories of his father, who taught him to ride a bicycle and tended a garden allotment around the corner from their home, separate from the Stovesberg complex itself. Steen later reflected on the time they spent there together:\n\nquote(My father had a garden 'commune', since we always lived in apartments without a garden. I have fond memories of the time I spent with my father planting vegetables and flowers from seeds. I even sold some of the final products to my mother. The beginning of my business career!)",
     "location": "Odense, Denmark",
-    "time": "1935 - 1943"
+    "time": "1935 - 1943",
+    "data": [
+      {
+        "image": "/images/data/family.jpg",
+        "caption": "Steen Metz (around age 6), sitting with his grandmother, Betty Metz, and his father, Axel Metz.",
+        "copyright": "IHMEC: courtesy of Steen Metz"
+      }
+    ]
   },
   "hjallesevej": {
     "title": "The Arrest",
     "subtitle": "Denmark under German Occupation",
     "text": "In April 1940, the same month German forces occupied Denmark, nine-year-old Steen and his family moved into a new apartment on Hjallesevej in Odense. Life continued as normal, Steen helped the milkman with his deliveries, and in 1942 he started school. But by the time he reached third class, Steen and his parents were arrested by the Nazis and taken from their home.\n\nClick on the interactive objects to find out more.",
     "location": "Odense, Denmark",
-    "time": "2 October 1943"
+    "time": "2 October 1943",
+    "data": [
+      {
+        "image": "/images/data/stovesberg.jpg",
+        "caption": "Stovesberg Apartment Complex",
+        "copyright": null
+      },
+      {
+        "caption": "Not sure if this photo fits here anymore, because they moved. But this text is a test for data where we have not photos. It would be good to describe the memory of Steen (in other terms than the story) as best as possible."
+      }
+    ]
   },
   "door_x5F_group": {
     "title": "The Arrest",
@@ -84,11 +120,15 @@
     },
     "data": [
       {
-        "image": "/images/data/cattlecar.png",
-        "caption": "Example image of a cattle car, which Steen Metz often shows during his presentations."
+        "image": "/images/data/arrival.jpg",
+        "caption": "Theresienstadt-Bauschowitz train station during WWI"
       },
       {
-        "image": "/images/data/trainstation",
+        "image": "/images/data/arrival2.jpg",
+        "caption": "Arrival of Jews in Theresienstadt"
+      },
+      {
+        "image": "/images/data/trainstation.jpg",
         "caption": "Postcard of the Theresienstadt-Bauschowitz train station in 1907, where prisoners would arrive before the construction of a station in Theresienstadt."
       }
     ]
@@ -102,7 +142,7 @@
     "data": [
       {
         "image": "/images/data/cattlecar.png",
-        "caption": "This is a complete different cattlecar, because it is only showing when the cattlecar is clicked."
+        "caption": "After their arrest, Steen and his parents were loaded into a crowded cattle car. Often, historians use the term box cart, but as Steen mentions, survivors often reter to it as a cattle cart', becaus that is what it was. Steen recalls that the cart smelled horrible as it had no bathroom facilities."
       }
     ]
   },
@@ -111,21 +151,43 @@
     "subtitle": "Transport to Theresienstadt",
     "text": "Theresienstadt had no railway station of its own. Instead, deportees were brought to the station Bauschowitz-Theresienstadt, known today as Bohušovice train station. From here, they were required to walk one and a half miles to reach the camp. Upon arrival, prisoners were ordered to surrender all valuables, including jewellery and money that they had been encouraged to bring. Steen's mother was permitted to retain her wedding ring solely because it could not be removed from her finger.\n\nAlthough the newly arrived prisoners were separated into groups based on gender and age, Steen was permitted to remain with his mother during his time at Theresienstadt.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "5 October 1943"
+    "time": "5 October 1943",
+    "data": [
+      {
+        "image": "/images/data/roof.jpg",
+        "caption": "Roof of Theresienstadt-Bauschowitz Train Station"
+      }
+    ]
   },
   "barracks": {
     "title": "Forced Labour",
     "subtitle": "Living Conditions in Theresienstadt",
     "text": "Steen and his mother were housed in a loft, where the poor environment posed challenges throughout the year: summers brought infestations of lice and fleas, while winters were marked by extreme cold.\n\nClick on the interactive objects to find out more.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "1935 - 1943"
+    "time": "1935 - 1943",
+    "data": [
+      {
+        "image": "/images/data/barracks2.jpg",
+        "caption": "Picture of Barracks"
+      },
+      {
+        "image": "/images/data/barracks.jpg",
+        "caption": "Reconstruction of Barracks"
+      }
+    ]
   },
   "mother_x5F_group": {
     "title": "Forced Labour",
     "subtitle": "Mica Production",
     "text": "According to Steen’s testimony, his mother was not subjected to physical abuse in Theresienstadt. In addition to childcare duties, she was assigned to factory work, producing insulation material for airplanes from mica. On one occasion, after telling a soldier that she was faring poorly following her husband’s death from malnutrition, the soldier returned each day for eight days, compelling her to state that her husband had died of pneumonia. On a separate occasion, a guard deliberately pushed over a bucket of dirty water while she was cleaning floors, forcing her to start over.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "1935 - 1943"
+    "time": "1935 - 1943",
+    "data": [
+      {
+        "image": "/images/data/forcedLabour.jpg",
+        "caption": "Forced Labour in Theresienstadt"
+      }
+    ]
   },
   "post_x5F_group": {
     "title": "Forced Labour",
@@ -139,7 +201,13 @@
     "subtitle": "Living Conditions in Theresienstadt",
     "text": "Prior to his arrest and deportation to Theresienstadt in October 1943, Steen’s father, Axel Mogens Metz, had practised as a lawyer. In camp, he was subjected to forced labour and physical abuse.\n\nClick on the interactive objects to find out more.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "13 March 1944"
+    "time": "13 March 1944",
+    "data": [
+      {
+        "image": "/images/data/forcedLabour2.jpg",
+        "caption": "Forced Labour Drawing"
+      }
+    ]
   },
   "coat_x5F_group": {
     "title": "Infirmary",
@@ -202,14 +270,34 @@
         "lat": 55.381537446534686,
         "lon": 10.395795592972672
       }
-    }
+    },
+    "data": [
+      {
+        "image": "/images/data/whitebussesBack.jpg",
+        "caption": "White Busses on their Way Back"
+      },
+      {
+        "image": "/images/data/whitebussesOdense.jpg",
+        "caption": "White Busses on their way to Odense"
+      }
+    ]
   },
   "whitebus_x5F_group": {
     "title": "Happier Times",
     "subtitle": "Liberation by the White Busses",
     "text": "The White Busses rescued approximately 425 surviving Danish Jews. Before departure, eight young Danish men married women from other countries so that they could also be liberated. Among those who left were four babies who had been born in the camp in secret. On the way back, the White Busses had to make several stops. Steen still remembers the sound of bombardments and the faces of young soldiers along the road.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "15 April 1945"
+    "time": "15 April 1945",
+    "data": [
+      {
+        "image": "/images/data/whitebusses.jpg",
+        "caption": "White Busses after Liberation"
+      },
+      {
+        "image": "/images/data/whitebusses2.jpg",
+        "caption": "White Busses Colorised"
+      }
+    ]
   },
   "crowd_x5F_group": {
     "title": "Happier Times",
@@ -223,7 +311,13 @@
     "subtitle": "The Beautification Program",
     "text": "In 1944, the International Committee of the Red Cross, accompanied by representatives of the Danish administration, requested access to the camp to assess the treatment of Danish Jewish prisoners. As far as Steen knows, there were no requests from other countries to see the camp. The Nazi authorities recognised the visit as a propaganda opportunity, giving Theresienstadt the nickname 'model camp'.\n\nClick on the interactive objects in the drawing to find out more.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "February 1944 - June 1944"
+    "time": "February 1944 - June 1944",
+    "data": [
+      {
+        "image": "/images/data/beautification.jpg",
+        "caption": "Drawing of Theresienstadt During Beautification Programme"
+      }
+    ]
   },
   "pavillion_x5F_group": {
     "title": "The Model Camp",
