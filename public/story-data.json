@@ -31,6 +31,11 @@
         "image": "/images/data/family.jpg",
         "caption": "Steen Metz (around age 6), sitting with his grandmother, Betty Metz, and his father, Axel Metz.",
         "copyright": "IHMEC: courtesy of Steen Metz"
+      },
+      {
+        "image": "/images/data/stovesberg.jpg",
+        "caption": "Stovesberg Apartment Complex",
+        "copyright": null
       }
     ]
   },
@@ -70,12 +75,7 @@
     "time": "2 October 1943",
     "data": [
       {
-        "image": "/images/data/stovesberg.jpg",
-        "caption": "Stovesberg Apartment Complex",
-        "copyright": null
-      },
-      {
-        "caption": "Not sure if this photo fits here anymore, because they moved. But this text is a test for data where we have not photos. It would be good to describe the memory of Steen (in other terms than the story) as best as possible."
+        "caption": "Insert photos here."
       }
     ]
   },
