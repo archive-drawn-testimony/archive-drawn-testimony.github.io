@@ -255,8 +255,8 @@
   },
   "whitebus": {
     "title": "Happier Times",
-    "subtitle": "Liberation by the White Busses",
-    "text": "In April 1945, a few weeks before the end of the war, prisoners in Theresienstadt heard rumours that the White Busses were on their way from Sweden to liberate the Danish Jews. Although Sweden was a neutral country, the White Busses arrived there safely three days later, on 18 April. It was a miracle that they had been able to travel through Germany unharmed.\n\nClick on the interactive objects in the drawing to find out more.",
+    "subtitle": "Liberation by the White Buses",
+    "text": "In April 1945, a few weeks before the end of the war, prisoners in Theresienstadt heard rumours that the White Buses were on their way from Sweden to liberate the Danish Jews. Although Sweden was a neutral country, the White Buses arrived there safely three days later, on 18 April. It was a miracle that they had been able to travel through Germany unharmed.\n\nClick on the interactive objects in the drawing to find out more.",
     "location": "Theresienstadt, Czechoslovakia",
     "time": "15 April 1945",
     "map": {
@@ -274,35 +274,35 @@
     "data": [
       {
         "image": "/images/data/whitebussesBack.jpg",
-        "caption": "White Busses on their Way Back"
+        "caption": "White Buses on their Way Back"
       },
       {
         "image": "/images/data/whitebussesOdense.jpg",
-        "caption": "White Busses on their way to Odense"
+        "caption": "White Buses on their way to Odense"
       }
     ]
   },
   "whitebus_x5F_group": {
     "title": "Happier Times",
-    "subtitle": "Liberation by the White Busses",
-    "text": "The White Busses rescued approximately 425 surviving Danish Jews. Before departure, eight young Danish men married women from other countries so that they could also be liberated. Among those who left were four babies who had been born in the camp in secret. On the way back, the White Busses had to make several stops in Germany.\n\nquote(I remember looking outside while in the bus and drawing back the curtain, which I was not supposed to do. I saw some very young soldiers!)",
+    "subtitle": "Liberation by the White Buses",
+    "text": "The White Buses rescued approximately 425 surviving Danish Jews. Before departure, eight young Danish men married women from other countries so that they could also be liberated. Among those who left were four babies who had been born in the camp in secret. On the way back, the White Buses had to make several stops in Germany.\n\nquote(I remember looking outside while in the bus and drawing back the curtain, which I was not supposed to do. I saw some very young soldiers!)",
     "location": "Theresienstadt, Czechoslovakia",
     "time": "15 April 1945",
     "data": [
       {
         "image": "/images/data/whitebusses.jpg",
-        "caption": "White Busses after Liberation"
+        "caption": "White Buses after Liberation"
       },
       {
         "image": "/images/data/whitebusses2.jpg",
-        "caption": "White Busses Colorised"
+        "caption": "White Buses Colorised"
       }
     ]
   },
   "crowd_x5F_group": {
     "title": "Happier Times",
-    "subtitle": "Liberation by the White Busses",
-    "text": "When the White Busses reached the Danish border on 17 April, Denmark was still under occupation. Nonetheless, the rescued Jews were greeted with flowers, candy, snacks, and sandwiches. Continuing through Denmark, the former prisoners took the ferry from the Copenhagen port to Malmö, Sweden, where the liberated prisoners were quarantined for two weeks in either Tylösand or Strangnæs.",
+    "subtitle": "Liberation by the White Buses",
+    "text": "When the White Buses reached the Danish border on 17 April, Denmark was still under occupation. Nonetheless, the rescued Jews were greeted with flowers, candy, snacks, and sandwiches. Continuing through Denmark, the former prisoners took the ferry from the Copenhagen port to Malmö, Sweden, where the liberated prisoners were quarantined for two weeks in either Tylösand or Strangnæs.",
     "location": "Denmark",
     "time": "17 April 1945"
   },
