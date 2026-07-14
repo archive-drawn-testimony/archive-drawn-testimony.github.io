@@ -26,7 +26,7 @@ const paintings = [
   { key: "transport", svgFile: "/images/Transport scene-2.svg" },
   // { key: "barracks", svgFile: "/images/5. barracks.svg" },
   { key: "infirmary", svgFile: "/images/5.5 infirmary.svg" },
-  { key: "soccer", svgFile: "/images/Soccer scene-3b.svg" },
+  { key: "soccer", svgFile: "/images/7. Soccer scene.svg" },
   // { key: "modelcamp", svgFile: "/images/Model Camp scene-1.svg" },
   { key: "whitebus", svgFile: "/images/9. White Buses.svg" },
   { key: "after", svgFile: "/images/11. After Theresienstadt.svg" },
