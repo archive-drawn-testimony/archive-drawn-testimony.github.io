@@ -25,17 +25,12 @@
       {
         "image": "/images/data/icecream.jpg",
         "caption": "Steen Metz, age 8, eating an ice cream cone.",
-        "copyright": " IHMEC: courtesy of Steen Metz"
+        "copyright": " IHMEC: courtesy of Steen Metz."
       },
       {
         "image": "/images/data/family.jpg",
         "caption": "Steen Metz (around age 6), sitting with his grandmother, Betty Metz, and his father, Axel Metz.",
-        "copyright": " IHMEC: courtesy of Steen Metz"
-      },
-      {
-        "image": "/images/data/stovesberg.jpg",
-        "caption": "Stovesberg Apartment Complex",
-        "copyright": " Housing Cooperative Stovesberg"
+        "copyright": " IHMEC: courtesy of Steen Metz."
       }
     ]
   },
@@ -75,8 +70,9 @@
     "time": "2 October 1943",
     "data": [
       {
-        "caption": "Insert photos here.",
-        "copyright": null
+        "image": "/images/data/stovesberg.jpg",
+        "caption": "Stovesberg Apartment Complex.",
+        "copyright": " Housing Cooperative Stovesberg."
       }
     ]
   },
