@@ -10,7 +10,7 @@
       {
         "image": "/images/data/steen.jpg",
         "caption": "Holocaust survivor Steen Metz at his home on Feb. 3, 2022, in Barrington.",
-        "copyright": " Stacey Wescott / Chicago Tribune"
+        "copyright": " Stacey Wescott / Chicago Tribune."
       }
     ]
   },
@@ -44,7 +44,7 @@
       {
         "image": "/images/data/icecream.jpg",
         "caption": "Steen Metz, age 8, eating an ice cream cone.",
-        "copyright": " IHMEC: courtesy of Steen Metz"
+        "copyright": " IHMEC: courtesy of Steen Metz."
       }
     ]
   },
@@ -58,7 +58,7 @@
       {
         "image": "/images/data/family.jpg",
         "caption": "Steen Metz (around age 6), sitting with his grandmother, Betty Metz, and his father, Axel Metz.",
-        "copyright": " IHMEC: courtesy of Steen Metz"
+        "copyright": " IHMEC: courtesy of Steen Metz."
       }
     ]
   },
@@ -78,6 +78,7 @@
         "image": "/images/data/arrest_hjallesevej.jpg",
         "caption": "Stovesberg Apartment Complex in 2025",
         "copyright": "Photo: Anouk Stevens."
+      }
     ]
   },
   "door_x5F_group": {
