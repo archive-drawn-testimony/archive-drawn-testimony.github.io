@@ -432,7 +432,14 @@
         "lat": 62.3933,
         "lon": -96.8181
       }
-    }
+    },
+    "data": [
+      {
+        "image": "/images/data/after_gymnasium.jpg",
+        "caption": "Sct. Knuds Gymnasium in 1940.",
+        "copyright": " H. Lykke."
+      }
+    ]
   },
   "family_x5F_group": {
     "title": "After Theresienstadt",
