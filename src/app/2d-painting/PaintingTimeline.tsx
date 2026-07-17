@@ -64,6 +64,19 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
   const discoveredStoryCount = discoveredStoryKeys.length;
   const totalStoryCount = Object.keys(storyData).length;
 
+  function navigatePreviousScene() {
+    if (selectedPainting > 0) {
+      const previousPainting = selectedPainting - 1;
+      dispatch(setSelectedPainting(previousPainting));
+      dispatch(
+        setSelectedGroup(
+          previousInteractiveElements[previousInteractiveElements.length - 1] ??
+          null
+        )
+      );
+    }
+  }
+
   function navigatePrevious() {
     if (selectedGroupIndex > 0) {
       dispatch(
@@ -77,15 +90,13 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
       return;
     }
 
-    if (selectedPainting > 0) {
-      const previousPainting = selectedPainting - 1;
-      dispatch(setSelectedPainting(previousPainting));
-      dispatch(
-        setSelectedGroup(
-          previousInteractiveElements[previousInteractiveElements.length - 1] ??
-          null
-        )
-      );
+    navigatePreviousScene()
+  }
+
+  function navigateNextScene() {
+    if (selectedPainting + 1 < paintings.length) {
+      dispatch(setSelectedPainting(selectedPainting + 1));
+      dispatch(setSelectedGroup(null));
     }
   }
 
@@ -105,10 +116,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
       return;
     }
 
-    if (selectedPainting + 1 < paintings.length) {
-      dispatch(setSelectedPainting(selectedPainting + 1));
-      dispatch(setSelectedGroup(null));
-    }
+    navigateNextScene();
   }
 
   useEffect(() => {
@@ -129,7 +137,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
   }, [svgRef.current]);
 
   return (
-    <div className="size-full items-center grid grid-cols-[64px_auto_64px] gap-2 border-t border-gray-300 relative">
+    <div className="size-full items-center grid grid-cols-[64px_64px_auto_64px_64px] gap-2 border-t border-gray-300 relative">
       <svg className="size-full absolute top-0 left-0 pointer-events-none">
         <filter id="roughpaper-timeline">
           <feTurbulence
@@ -152,15 +160,35 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
         />
       </svg>
       {canNavigatePrevious && (
-        <div
-          className="rounded-full px-2 size-16 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer items-center justify-center flex"
-          onClick={navigatePrevious}
-        >
-          <ChevronLeftIcon className="size-7" />
-        </div>
+        <>
+          <div
+            className="rounded-full px-2 size-16 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer items-center justify-center flex"
+            onClick={navigatePreviousScene}
+          >
+            <ChevronLeftIcon className="size-7" />
+          </div>
+          <div className="col-start-2 row-start-1 z-10 flex size-full flex-col items-center justify-center gap-1">
+            {canNavigatePrevious && (
+              <div className="size-16 flex items-center justify-center">
+                <div
+                  className="px-2 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer size-8 rounded-full justify-center items-center flex"
+                  onClick={navigatePrevious}
+                >
+                  <ChevronLeftIcon className="size-7" />
+                </div>
+              </div>
+            )}
+            <div
+              className={`text-xs text-gray-600 whitespace-nowrap ${noto_serif.className}`}
+              aria-label={`Discovered ${discoveredStoryCount} of ${totalStoryCount} story entries`}
+            >
+              Previous detail
+            </div>
+          </div>
+        </>
       )}
       <div
-        className="w-full grid items-center painting-timeline grid-rows-[auto_auto_auto] relative col-start-2"
+        className="w-full grid items-center painting-timeline grid-rows-[auto_auto_auto] relative col-start-3"
         style={{
           gridTemplateColumns: `repeat(${Math.max(
             1,
@@ -175,13 +203,13 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
             <>
               <div
                 key={`timeline-title-${i}`}
-                className={`text-xs row-start-1 py-1 ${noto_serif.className}`}
+                className={`hidden text-xs row-start-1 py-1 ${noto_serif.className} `}
               >
                 {story?.shorttitle != null ? story.shorttitle : story?.title}
               </div>
               <div
                 key={`timeline-image-${i}`}
-                className="relative items-center justify-between flex pr-5 row-start-2"
+                className="hidden relative items-center justify-between flex pr-5 row-start-2"
               >
                 <div className="absolute top-0 left-0 w-full h-full flex items-center">
                   <div
@@ -280,7 +308,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
               </div>
               <div
                 key={`timeline-time-${i}`}
-                className={`text-xs row-start-3 py-1 ${noto_serif.className}`}
+                className={`hidden text-xs row-start-3 py-1 ${noto_serif.className}`}
               >
                 {story?.time}
               </div>
@@ -288,11 +316,31 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
           );
         })}
       </div>
-      <div className="col-start-3 row-start-1 z-10 flex size-full flex-col items-center justify-center gap-1">
+      <div className="col-start-4 row-start-1 z-10 flex size-full flex-col items-center justify-center gap-1">
+        {canNavigateNext && (
+          <div className="size-16 flex items-center justify-center">
+            <div
+              className="px-2 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer size-8 rounded-full justify-center items-center flex"
+              onClick={navigateNext}
+            >
+              <ChevronRightIcon className="size-7" />
+            </div>
+          </div>
+        )}
         {canNavigateNext && (
           <div
+            className={`text-xs text-gray-600 ${noto_serif.className}`}
+            aria-label={`Discovered ${discoveredStoryCount} of ${totalStoryCount} story entries`}
+          >
+            Next detail
+          </div>)}
+      </div>
+      <div className="col-start-5 row-start-1 z-10 flex size-full flex-col items-center justify-center gap-1">
+        {canNavigateNext && (
+
+          <div
             className="px-2 shadow hover:shadow-lg hover:bg-gray-400 hover:text-white cursor-pointer size-16 rounded-full justify-center items-center flex"
-            onClick={navigateNext}
+            onClick={navigateNextScene}
           >
             <ChevronRightIcon className="size-7" />
           </div>
