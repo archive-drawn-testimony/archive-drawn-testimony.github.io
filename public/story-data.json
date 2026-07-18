@@ -124,19 +124,24 @@
     },
     "data": [
       {
+        "image": "/images/data/transport_document.jpg",
+        "caption": "Transportation document of Steen Axel Metz. 54 was the number given to Steen, XXV/I refers to the first transport of Danish Jews to Theresienstadt.",
+        "copyright": " Arolsen Archives."
+      },
+      {
         "image": "/images/data/arrival.jpg",
-        "caption": "Theresienstadt-Bauschowitz train station during WWI",
-        "copyright": " Zdeněk Fořt"
+        "caption": "Theresienstadt-Bauschowitz train station during WWI.",
+        "copyright": " Zdeněk Fořt."
       },
       {
         "image": "/images/data/arrival2.jpg",
-        "caption": "Arrival of Jews in Theresienstadt",
+        "caption": "Arrival of Jews in Theresienstadt.",
         "copyright": " United States Holocaust Memorial Museum."
       },
       {
         "image": "/images/data/trainstation.jpg",
         "caption": "Postcard of the Theresienstadt-Bauschowitz train station in 1907, where prisoners would arrive before the construction of a station in Theresienstadt.",
-        "copyright": " Zdeněk Fořt"
+        "copyright": " Zdeněk Fořt."
       }
     ]
   },
@@ -163,7 +168,7 @@
     "data": [
       {
         "image": "/images/data/roof.jpg",
-        "caption": "Roof of Theresienstadt-Bauschowitz Train Station",
+        "caption": "Roof of Theresienstadt-Bauschowitz Train Station.",
         "copyright": " United States Holocaust Memorial Museum. Provenance: Ivan Vojtech Fric."
       }
     ]
@@ -178,12 +183,17 @@
       {
         "image": "/images/data/barracks2.jpg",
         "caption": "Picture of Barracks.",
-        "copyright": " Photo Archive Terezín Memorial"
+        "copyright": " Photo Archive Terezín Memorial."
       },
       {
         "image": "/images/data/barracks.jpg",
         "caption": "Reconstruction of Barracks.",
-        "copyright": " Terezín Memorial"
+        "copyright": " Terezín Memorial."
+      },
+      {
+        "image": "/images/data/living_barracks.jpg",
+        "caption": "A watercolor painting created by Zdenka Eismannova while she was interned in Theresienstadt depicting women resting on the bunk beds of a crowded barrack.",
+        "copyright": " United States Holocaust Memorial Museum. Provenance: Ron Neulinger."
       }
     ]
   },
@@ -195,9 +205,9 @@
     "time": "1935 - 1943",
     "data": [
       {
-        "image": "/images/data/forcedLabour.jpg",
-        "caption": "Forced Labour in Theresienstadt.",
-        "copyright": " United States Holocaust Memorial Museum"
+        "image": "/images/data/labour_mica.jpg",
+        "caption": "Two pieces of mica saved by Ilse Silten, a forced laborer in a glimmer factory." ,
+        "copyright": " United States Holocaust Memorial Museum."
       }
     ]
   },
@@ -236,6 +246,11 @@
         "copyright": " Montreal Holocaust Museum. Photo: Peter Berra."
       },
       {
+        "image": "/images/data/forcedLabour.jpg",
+        "caption": "Forced Labour in Theresienstadt.",
+        "copyright": " United States Holocaust Memorial Museum."
+      },
+      {
         "image": "/images/data/infirmary_forcedlabour.jpg",
         "caption": "Jews at forced labor, putting up fences beside barracks buildings in the Theresienstadt ghetto.",
         "copyright": " Photo Archive, Ghetto Fighters' House Museum Archive, catalogue no. 15656."
@@ -255,7 +270,24 @@
     "subtitle": "Life in Theresienstadt",
     "text": "Steen was only nine years old when he was held at Theresienstadt. Amid queuing for food and delivering messages in the camp, he found moments of friendship and childhood while playing soccer. In his testimony, Steen recalled that these were the only moments in which he felt closest to being a nine-year-old boy.",
     "location": "Theresienstadt, Czechoslovakia",
-    "time": "1943 - 1945"
+    "time": "1943 - 1945",
+    "data": [
+      {
+        "image": "/images/data/soccer_childrenbarrack.avif",
+        "caption": "Photo of a street in Theresienstadt near the childrens' barracks, made during the visit of the International Delegation of the Red Cross.",
+        "copyright": " ICRC - International Committee of the Red Cross"
+      },
+      {
+        "image": "/images/data/soccer_propaganda.avif",
+        "caption": "Children playing in a park in Theresienstadt, propaganda photo made during the visit of the International Delegation of the Red Cross.",
+        "copyright": " ICRC - International Committee of the Red Cross"
+      },
+      {
+        "image": "/images/data/soccer_sketch.jpeg",
+        "caption": "Initial sketch of the soccer scene.",
+        "copyright": " MEMORISE project. Illustration: Anouk Stevens."
+      }
+    ]
   },
   "ball_x5F_group": {
     "title": "The Soccer Field",
@@ -335,7 +367,12 @@
         "image": "/images/data/whitebusses2.jpg",
         "caption": "The White Busses after their arrival in Denmark.",
         "copyright": " Danish Red Cross."
-      }
+      },
+      {
+        "image": "/images/data/buses_document.jpg",
+        "caption": "Lists of released Jews from Theresienstadt who arrived in Sweden.",
+        "copyright": " Arolsen Archives."
+      } 
     ],
     "map": {
       "title": "From Theresienstadt to the Danish border with the borders of 1938.",
@@ -357,6 +394,10 @@
     "location": "Denmark",
     "time": "17 April 1945",
     "data": [
+      {
+        "caption": "Everywhere we came the flag was raised, and everywhere people shouted welcome and hurrah, and they threw chocolate, flowers, small Danish flags, cigarettes, cakes and open sandwiches [smørrebrød] to us. It was the best day of my life. People were standing everywhere; the streets were full and from all windows people were greeting us welcome. The German soldiers stood around and could do nothing.",
+        "copyright": " Ellen Oppenhejm quoted in The Jews of Denmark in the Holocaust: Life and Death in Theresienstadt Ghetto, by Silvia Goldbaum Tarabini Fracapane."
+      },
       {
         "image": "/images/data/buses_welcomejutland.jpg",
         "caption": "The White Buses traveling through southern Jutland, where the White Buses are welcomed by cheering crowds.",

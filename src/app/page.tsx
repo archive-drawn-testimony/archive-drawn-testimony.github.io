@@ -163,7 +163,7 @@ function MainMenu() {
     }
   }, [selectedStoryKey, storyData]);
 
-  const renderContent = useCallback((story: any, dataView: any, inactive = false, selectedGroup = null) => {
+  const renderContent = useCallback((story: any, dataView: any, inactive = false, selectedGroup: string | null = null) => {
     return <>
       <div className={`text-xl ${noto_serif.className}`}>
         {story.title
@@ -201,7 +201,7 @@ function MainMenu() {
               ? renderStoryText(story.text)
               : "Please add text."}
           </div>
-          {inactive !== true && selectedGroup === null &&
+          {inactive !== true && !selectedGroup &&
             <div className="text-base flex flex-row items-center gap-1">
               <span>Click on the interactive objects in the drawing to find out more.</span>
               <div><CursorArrowRaysIcon className="size-7 animate-pulse" /></div>
