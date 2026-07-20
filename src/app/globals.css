@@ -155,8 +155,16 @@ input:checked + .slider:before {
 
 .painting-main {
     background: #ffffff;
-    /* background-image: url(/assets/paper-texture.jpg); */
-    /* filter: url(#roughpaper); */
+}
+
+.painting-paper-overlay {
+  background-image: url("/assets/paper-texture.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  mix-blend-mode: multiply;
+  opacity: 0.15;
+  transform: translateZ(0);
 }
 
 .painting-map,
@@ -343,14 +351,59 @@ input:checked + .slider:before {
   }
 }
 
-.timeline-painting-svg {
-  image {
-    filter: drop-shadow(rgba(0, 0, 0, 0.5) 0px 0px 5px);
+.timeline-painting-shadow {
+  -webkit-filter: drop-shadow(rgba(0, 0, 0, 0.5) 0 0 5px);
+  filter: drop-shadow(rgba(0, 0, 0, 0.5) 0 0 5px);
+}
+
+/* Safari can composite filtered SVG descendants outside a rounded overflow
+   clip. The mask forces the rounded container to become the clipping layer. */
+.safari-rounded-clip {
+  contain: paint;
+  isolation: isolate;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.safari-rounded-clip svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+@keyframes tutorial-draw-arrow {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
   }
 }
 
-.mybackground {
-  image {
-    filter: none;
+@keyframes tutorial-highlight-pulse {
+  0%,
+  100% {
+    stroke-opacity: 0.55;
+  }
+  50% {
+    stroke-opacity: 1;
+  }
+}
+
+.tutorial-arrow {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: tutorial-draw-arrow 0.8s ease-out forwards;
+}
+
+.tutorial-highlight {
+  animation: tutorial-highlight-pulse 1.8s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tutorial-arrow,
+  .tutorial-highlight {
+    animation: none;
+    stroke-dashoffset: 0;
   }
 }
