@@ -486,7 +486,7 @@ export default function Painting(props: PaintingProps) {
   }, [selectedGroup]);
 
   return (
-    <div className="size-full grid grid-cols-1 grid-rows-1 relative">
+    <div className="size-full grid grid-cols-1 grid-rows-1 relative opacity-80">
       <div className="absolute size-full">
         <div
           className="size-full flex justify-center resize-none relative cursor-pointer"
