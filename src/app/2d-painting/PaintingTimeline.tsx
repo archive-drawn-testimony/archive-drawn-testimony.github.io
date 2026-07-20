@@ -154,7 +154,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
             i < paintings.length - 1 && discoveredStoryKeys.includes(paintings[i + 1].key);
           const connectingLineDiscovered =
             paintingDiscovered && previousPaintingDiscovered;
-          let borderStyle = "border-3 border-transparent";
+          let borderStyle = "border-3 border-gray-200";
 
           if (paintingDiscovered) {
             borderStyle = "border-3 border-gray-400"
@@ -190,7 +190,7 @@ export function PaintingTimeline(props: PaintingTimelineProps) {
                   }}
                   ref={svgRef}
                 >
-                  <div className="size-full absolute timeline-painting-shadow">
+                  <div className="size-full absolute">
                     <SVG
                       src={e.svgFile}
                       className="size-full object-contain"

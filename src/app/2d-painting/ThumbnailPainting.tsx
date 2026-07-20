@@ -44,7 +44,7 @@ export function ThumbnailPainting(props: ThumbnailPaintingProps) {
       });
   }, [svgFile, elementID]);
 
-  let borderSyle = "border-3 border-transparent";
+  let borderSyle = "border-3 border-gray-200";
 
   if (discovered) {
     borderSyle = "border-3 border-gray-400"
