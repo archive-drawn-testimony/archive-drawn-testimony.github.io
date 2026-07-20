@@ -414,7 +414,9 @@ export default function Painting(props: PaintingProps) {
 
   useEffect(() => {
     if (svgWrapperSize != null) {
-      const svg = document.querySelector("svg") as SVGSVGElement;
+      const svg = (svgRef.current as HTMLElement | null)?.querySelector(
+        "svg"
+      ) as SVGSVGElement | null;
       if (svg != null) {
         (svg as SVGSVGElement).setAttribute(
           "orig-viewbox",
@@ -503,18 +505,13 @@ export default function Painting(props: PaintingProps) {
             }}
             src={svgFile}
             className="size-full object-contain absolute"
-            // style={{
-            //   backgroundImage: "url('/assets/paper-texture.jpg')",
-            // }}
             preProcessor={(code) => {
               const svgSize = getSvgDimensionsFromString(code);
-              code = code.replaceAll(
+              code = code.replace(
                 "</svg>",
-                `<filter id='roughpaper'><feTurbulence type="fractalNoise" baseFrequency='0.04' result='noise' numOctaves="5" /><feDiffuseLighting in='noise' lighting-color='#fff' surfaceScale='2'><feDistantLight azimuth='45' elevation='60' /></feDiffuseLighting></filter><rect id="paper-rect" x="-50%" y="-50%" width="${(svgSize.width as number) * 2
-                }" height="${(svgSize.height as number) * 2
-                }" filter="url(#roughpaper)" opacity="0.3" pointer-events="none"/><rect id="viewbox-rect" x="0" y="0" width="${svgSize.width as number
+                `<rect id="viewbox-rect" x="0" y="0" width="${svgSize.width as number
                 }" height="${svgSize.height as number
-                }" fill="transparent" pointer-events="none"/>`
+                }" fill="transparent" pointer-events="none"/></svg>`
               );
               return code;
             }}

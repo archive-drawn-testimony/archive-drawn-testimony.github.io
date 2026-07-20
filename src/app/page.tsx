@@ -9,7 +9,8 @@ import { State, store } from "../../store/store";
 import Painting from "./2d-painting/painting";
 import { PaintingTimeline } from "./2d-painting/PaintingTimeline";
 import { getSteenPortrait, PaintingAudio } from "./2d-painting/PaintingAudio";
-import { PaintingMap } from "./map/PaintingMap";
+import { CursorArrowRaysIcon, QuestionMarkCircleIcon } from "@heroicons/react/24/solid";
+import { TutorialOverlay } from "./TutorialOverlay";
 
 const reenie_beanie = Reenie_Beanie({ weight: "400", subsets: ["latin"] });
 const noto_serif = Noto_Serif({ weight: "400", subsets: ["latin"] });
@@ -44,9 +45,12 @@ function renderStoryParagraph(text: string, paragraphIndex: number) {
     }
 
     parts.push(
-      <div className="w-full flex flex-row gap-3 items-center">
+      <div
+        key={`story-quote-${paragraphIndex}-${match.index}`}
+        className="w-full flex flex-row gap-3 items-center"
+      >
         {getSteenPortrait()}
-        <span className="italic" key={`story-quote-${paragraphIndex}-${match.index}`}>
+        <span className="italic">
           "{match[1]}"
         </span>
       </div>
@@ -64,9 +68,9 @@ function renderStoryParagraph(text: string, paragraphIndex: number) {
 
 function renderStoryText(text: string) {
   return text.split("\n").map((paragraph, i) => (
-    <p key={`story-text-${i}`}>
+    <div key={`story-text-${i}`}>
       {renderStoryParagraph(paragraph, i)}
-    </p>
+    </div>
   ));
 }
 
@@ -104,6 +108,7 @@ function MainMenu() {
   const [dataView, setDataView] = useState<boolean>(false);
   const [focusData, setFocusData] = useState<any>(null);
   const [discoveredStoryKeys, setDiscoveredStoryKeys] = useState<Array<string>>([]);
+  const [tutorialOpen, setTutorialOpen] = useState(false);
 
   useEffect(() => {
     fetch("/story-data.json")
@@ -162,7 +167,7 @@ function MainMenu() {
     }
   }, [selectedStoryKey, storyData]);
 
-  const renderContent = useCallback((story: any, dataView: any) => {
+  const renderContent = useCallback((story: any, dataView: any, inactive = false, selectedGroup: string | null = null) => {
     return <>
       <div className={`text-xl ${noto_serif.className}`}>
         {story.title
@@ -186,7 +191,7 @@ function MainMenu() {
       </div>
       {dataView && story.data != null ?
         <>
-          {story.data.map((e: any) => <div className="border-black border-0">
+          {story.data.map((e: any, i: number) => <div key={`story-data-${i}`} className="border-black border-0">
             {e.image && <div className="flex items-center cursor-zoom-in mb-1">
               <img onClick={() => { setFocusData(e) }} className="w-full z-50" src={e.image} />
             </div>}
@@ -200,6 +205,11 @@ function MainMenu() {
               ? renderStoryText(story.text)
               : "Please add text."}
           </div>
+          {inactive !== true && !selectedGroup &&
+            <div className="text-base flex flex-row items-center gap-1">
+              <span>Click on the interactive objects in the drawing to find out more.</span>
+              <div><CursorArrowRaysIcon className="size-7 animate-pulse" /></div>
+            </div>}
           <div className="text-base flex gap-1 flex-col">
             {story.audio &&
               <PaintingAudio src={`/audio/${story.audio}`} />
@@ -226,8 +236,46 @@ function MainMenu() {
         dispatch(setMode("explore"));
       }}
     >
+      <div className="z-[950] fixed top-5 right-5 flex flex-col gap-2 items-end" data-tutorial="data">
+        <button
+          type="button"
+          className="flex items-center gap-1 rounded-md p-0.5 border border-gray-300 bg-white/95 text-sm text-gray-900 shadow-md backdrop-blur transition hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-gray-500 cursor-pointer w-min"
+          aria-label="Open screen tutorial"
+          aria-expanded={tutorialOpen}
+          onClick={(event) => {
+            event.stopPropagation();
+            setTutorialOpen(true);
+          }}
+        >
+          <span className="hidden sm:inline hover:visible">Tutorial</span>
+          <QuestionMarkCircleIcon className="size-5 fill-gray-600" />
+        </button>
+        {/* {story.data != null &&
+          <button
+            type="button"
+            role="switch"
+            aria-checked={dataView}
+            aria-label={`See the ${dataView ? "story" : "data"}`}
+            className="z-50 flex items-center gap-2 rounded-m text-sm transition"
+            onClick={(event) => {
+              event.stopPropagation();
+              setDataView((currentDataView) => !currentDataView);
+            }}
+          >
+            <span>View</span>
+            <div className="grid grid-cols-2 items-center rounded-md border border-gray-400 cursor-pointer overflow-hidden">
+              <div className={`h-full p-0.5 text-center transition-colors ${dataView ? "text-gray-700 bg-white" : "bg-gray-600 text-white shadow-sm"}`}>
+                story
+              </div>
+              <div className={`h-full p-0.5 text-center transition-colors ${dataView ? "bg-gray-600 text-white shadow-sm" : "text-gray-700 bg-white"}`}>
+                data
+              </div>
+            </div>
+          </button>} */}
+      </div>
+
       <div className="relative size-full items-center grid grid-rows-1 grid-cols-[70%_30%] justify-center">
-        <div className="size-full">
+        <div className="size-full" data-tutorial="painting">
           <div className="absolute top-0 left-0 h-16 w-full z-30 flex px-2">
             <Link
               className="relative w-25"
@@ -254,69 +302,23 @@ function MainMenu() {
             />
           }
         </div>
-        <div className="size-full relative">
+
+        <div className="size-full relative" data-tutorial="story">
           <div className="size-full absolute top-0 left-0">
             {storyData != null && (
               <div className={`size-full text-gray-950 relative transition-all ${dataView ? 'bg-gray-300 border-l border-gray-400' : ''}`}>
                 <div className="absolute top-0 left-0 size-full overflow-hidden overflow-y-scroll flex items-center">
-                  {/* {story.data != null &&
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={dataView}
-                      aria-label={`See the ${dataView ? "story" : "data"}`}
-                      className="absolute top-5 right-5 z-50 flex items-center gap-2 rounded-m px-2 py-1 text-sm transition"
-                      onClick={(event) => {
-                        event.stopPropagation();
-                        setDataView((currentDataView) => !currentDataView);
-                      }}
-                    >
-                      <span>View</span>
-                      <div className="grid grid-cols-2 items-center rounded-md border border-gray-400 cursor-pointer">
-                        <div className={`h-full p-1 text-center transition-colors ${dataView ? "text-gray-700" : "bg-gray-600 text-white shadow-sm"}`}>
-                          story
-                        </div>
-                        <div className={`h-full p-1 text-center transition-colors ${dataView ? "bg-gray-600 text-white shadow-sm" : "text-gray-700"}`}>
-                          data
-                        </div>
-                      </div>
-                    </button>} */}
                   <div className="w-full max-h-full flex gap-2 flex-col p-3 px-6">
-                    {renderContent(story, dataView)}
+                    {renderContent(story, dataView, painting.inactive, selectedGroup)}
                   </div>
                 </div>
-                <svg className="size-full absolute top-0 left-0 pointer-events-none">
-                  <filter id="roughpaper-sidebar">
-                    <feTurbulence
-                      type="fractalNoise"
-                      baseFrequency="0.04"
-                      result="noise"
-                      numOctaves="5"
-                    />
-
-                    <feDiffuseLighting
-                      in="noise"
-                      lightingColor="#fff"
-                      surfaceScale="2"
-                    >
-                      <feDistantLight azimuth="45" elevation="60" />
-                    </feDiffuseLighting>
-                  </filter>
-                  <rect
-                    width={"100%"}
-                    height={"100%"}
-                    filter="url(#roughpaper-sidebar)"
-                    opacity={0.3}
-                    fill="white"
-                  />
-                </svg>
               </div>
             )}
           </div>
         </div>
       </div>
 
-      <div className="size-full">
+      <div className="size-full" data-tutorial="timeline">
         {storyData && (
           <PaintingTimeline
             paintings={paintings}
@@ -333,6 +335,12 @@ function MainMenu() {
         {focusData.caption != null && <div>{focusData.caption}</div>}
         {focusData.copyright != null && <div>&copy; {focusData.copyright}</div>}
       </div>}
+
+      <TutorialOverlay
+        open={tutorialOpen}
+        onClose={() => setTutorialOpen(false)}
+      />
+      <div className="painting-paper-overlay absolute inset-0 pointer-events-none" />
     </div>
   );
 }
